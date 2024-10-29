@@ -18,17 +18,19 @@
 
 # yaml-language-server: $schema=../../schemas/org-policies.schema.json
 
-iam.automaticIamGrantsForDefaultServiceAccounts:
-  rules:
-    - enforce: true
+# The following are already pre-enabled:
+# -----
+# iam.automaticIamGrantsForDefaultServiceAccounts:
+#   rules:
+#     - enforce: true
 
-iam.disableServiceAccountKeyCreation:
-  rules:
-    - enforce: true
+# iam.disableServiceAccountKeyCreation:
+#   rules:
+#     - enforce: true
 
-iam.disableServiceAccountKeyUpload:
-  rules:
-    - enforce: true
+# iam.disableServiceAccountKeyUpload:
+#   rules:
+#     - enforce: true
 
 iam.serviceAccountKeyExposureResponse:
   rules:

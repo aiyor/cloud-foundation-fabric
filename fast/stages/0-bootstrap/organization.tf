@@ -110,13 +110,15 @@ import {
     : toset([
       # source: https://cloud.google.com/resource-manager/docs/secure-by-default-organizations#organization_policies_enforced_on_organization_resources
       # listed in the order as on page
-      "iam.disableServiceAccountKeyCreation",
-      "iam.disableServiceAccountKeyUpload",
-      "iam.automaticIamGrantsForDefaultServiceAccounts",
-      "iam.allowedPolicyMemberDomains",
-      "essentialcontacts.allowedContactDomains",
-      "storage.uniformBucketLevelAccess",
-      "compute.setNewProjectDefaultToZonalDNSOnly", # Verified as of 2024-09-13
+
+      # Already created
+      # "iam.disableServiceAccountKeyCreation",
+      # "iam.disableServiceAccountKeyUpload",
+      # "iam.automaticIamGrantsForDefaultServiceAccounts",
+      # "iam.allowedPolicyMemberDomains",
+      # "essentialcontacts.allowedContactDomains",
+      # "storage.uniformBucketLevelAccess",
+      # "compute.setNewProjectDefaultToZonalDNSOnly", # Verified as of 2024-09-13
       # "constraints/compute.restrictProtocolForwardingCreationForTypes", # Officially be applied starting 2024-08-15, but still MIA as of 2024-09-13
     ])
   )
@@ -243,48 +245,48 @@ module "organization" {
     }
   }
   org_policies = var.bootstrap_user != null ? {} : {
-    "essentialcontacts.allowedContactDomains" = {
-      rules = [
-        {
-          allow = { values = local.essential_contacts_domains }
-          condition = {
-            expression = (
-              "!resource.matchTag('${local.org_policies_tag_name}', 'allowed-essential-contacts-domains-all')"
-            )
-          }
-        },
-        {
-          allow = { all = true }
-          condition = {
-            expression = (
-              "resource.matchTag('${local.org_policies_tag_name}', 'allowed-essential-contacts-domains-all')"
-            )
-            title = "allow-all"
-          }
-        },
-      ]
-    }
-    "iam.allowedPolicyMemberDomains" = {
-      rules = [
-        {
-          allow = { values = local.drs_domains }
-          condition = {
-            expression = (
-              "!resource.matchTag('${local.org_policies_tag_name}', 'allowed-policy-member-domains-all')"
-            )
-          }
-        },
-        {
-          allow = { all = true }
-          condition = {
-            expression = (
-              "resource.matchTag('${local.org_policies_tag_name}', 'allowed-policy-member-domains-all')"
-            )
-            title = "allow-all"
-          }
-        },
-      ]
-    }
+    # "essentialcontacts.allowedContactDomains" = {
+    #   rules = [
+    #     {
+    #       allow = { values = local.essential_contacts_domains }
+    #       condition = {
+    #         expression = (
+    #           "!resource.matchTag('${local.org_policies_tag_name}', 'allowed-essential-contacts-domains-all')"
+    #         )
+    #       }
+    #     },
+    #     {
+    #       allow = { all = true }
+    #       condition = {
+    #         expression = (
+    #           "resource.matchTag('${local.org_policies_tag_name}', 'allowed-essential-contacts-domains-all')"
+    #         )
+    #         title = "allow-all"
+    #       }
+    #     },
+    #   ]
+    # }
+    # "iam.allowedPolicyMemberDomains" = {
+    #   rules = [
+    #     {
+    #       allow = { values = local.drs_domains }
+    #       condition = {
+    #         expression = (
+    #           "!resource.matchTag('${local.org_policies_tag_name}', 'allowed-policy-member-domains-all')"
+    #         )
+    #       }
+    #     },
+    #     {
+    #       allow = { all = true }
+    #       condition = {
+    #         expression = (
+    #           "resource.matchTag('${local.org_policies_tag_name}', 'allowed-policy-member-domains-all')"
+    #         )
+    #         title = "allow-all"
+    #       }
+    #     },
+    #   ]
+    # }
     # "gcp.resourceLocations" = {}
     # "iam.workloadIdentityPoolProviders" = {}
   }

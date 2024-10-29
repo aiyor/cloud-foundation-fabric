@@ -44,9 +44,9 @@ compute.skipDefaultNetworkCreation:
   rules:
     - enforce: true
 
-compute.setNewProjectDefaultToZonalDNSOnly:
-  rules:
-  - enforce: true  
+# compute.setNewProjectDefaultToZonalDNSOnly:
+#   rules:
+#   - enforce: true  
   
 # only allow GCP images by default
 compute.trustedImageProjects:
